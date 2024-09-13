@@ -19,23 +19,25 @@ public class AccountsRepositoryInMemory implements AccountsRepository {
         if (previousAccount != null) {
 
             status = "duplicate";
-//            throw new DuplicateAccountIdException(
-//                    "Account id " + account.getAccountId() + " already exists!");
             System.out.println(status);
         }
+
+        String responseBody="";
+
+        if(status.equalsIgnoreCase("duplicate"))
+        {
+            responseBody ="Account : "+account.getAccountId() +" Already exists, Please try with \n another " +
+                    "account Id";
+            System.out.println(responseBody);
+        } else if (status.equalsIgnoreCase("created")) {
+            responseBody ="Account  : "+account.getAccountId() +" Created Successful";
+        }
         System.out.println(status);
-        return status;
+        return responseBody;
     }
 
     @Override
     public Account getAccount(String accountId) {
-
-
-
-//        if(null == accounts.get(accountId))
-//        {
-//            throw new AccountNotFoundException(" Account id " + accountId + " Not Found!");
-//        }
         return accounts.get(accountId);
     }
 
