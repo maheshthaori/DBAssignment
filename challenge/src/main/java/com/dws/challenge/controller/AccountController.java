@@ -38,17 +38,6 @@ public class AccountController {
         BigDecimal amount= new BigDecimal(transferRequest.get("amount").toString());
         Account account = new Account(accountId,amount);
         String response = accountsService.createAccount(account) ;
-        String responseBody="";
-
-        if(response.equalsIgnoreCase("duplicate"))
-        {
-            responseBody ="Account : "+accountId +" Already exists, Please try with \n another " +
-                    "account Id";
-            System.out.println(responseBody);
-        } else if (response.equalsIgnoreCase("created")) {
-            responseBody ="Account  : "+accountId +" Created Successful";
-        }
-
-        return new ResponseEntity<>(responseBody, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
